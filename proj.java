@@ -1,6 +1,5 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 // Класс для представления мероприятий
 class Event {
@@ -63,53 +62,74 @@ class Ticket {
 
 // Класс для управления системой билетов
 class TicketSystem {
-    private Map<Integer, Event> events = new HashMap<>();
-    private Map<Integer, Ticket> tickets = new HashMap<>();
+    private List<Event> events = new ArrayList<>();
+    private List<Ticket> tickets = new ArrayList<>();
 
     // Метод для добавления мероприятия
-    public void addEvent(int eventId, Event event) {
-        events.put(eventId, event);
+    public void addEvent(Event event) {
+        events.add(event);
     }
 
     // Метод для добавления билета
     public void addTicket(String eventName, String type, double price) {
-        if (!events.containsValue(eventName)) {
+        Event event = findEventByName(eventName);
+        if (event == null) {
             System.out.println("Мероприятие не найдено.");
             return;
         }
 
         Ticket ticket = new Ticket(eventName, type, price);
-        tickets.put(ticket.getId(), ticket);
+        tickets.add(ticket);
         System.out.println("Билет успешно добавлен. Номер билета: " + ticket.getId());
     }
 
-    // Метод для отображения информации о мероприятии по его ID
-    public void showEventInfo(int eventId) {
-        Event event = events.get(eventId);
+    // Метод для поиска мероприятия по имени
+    private Event findEventByName(String eventName) {
+        for (Event event : events) {
+            if (event.getName().equals(eventName)) {
+                return event;
+            }
+        }
+        return null;
+    }
+
+    // Метод для отображения информации о мероприятии по его имени
+    public void showEventInfo(String eventName) {
+        Event event = findEventByName(eventName);
         if (event != null) {
             System.out.println("Название мероприятия: " + event.getName());
             System.out.println("Дата: " + event.getDate());
             System.out.println("Место: " + event.getLocation());
         } else {
-            System.out.println("Мероприятие с указанным ID не найдено.");
+            System.out.println("Мероприятие с указанным именем не найдено.");
         }
     }
 
     // Метод для отображения информации о билете по его ID
     public void showTicketInfo(int ticketId) {
-        Ticket ticket = tickets.get(ticketId);
+        Ticket ticket = findTicketById(ticketId);
         if (ticket != null) {
             System.out.println("Номер билета: " + ticket.getId());
             System.out.println("Мероприятие: " + ticket.getEvent());
             System.out.println("Тип билета: " + ticket.getType());
             System.out.println("Цена: " + ticket.getPrice());
         } else {
-            System.out.println("Билет с указанным ID не найден.");
+            System.out.println("Билет с указанным номером не найден.");
         }
+    }
+
+    // Метод для поиска билета по его ID
+    private Ticket findTicketById(int ticketId) {
+        for (Ticket ticket : tickets) {
+            if (ticket.getId() == ticketId) {
+                return ticket;
+            }
+        }
+        return null;
     }
 }
 
-public class Main {
+public class proj {
     public static void main(String[] args) {
         // Создание системы управления билетами
         TicketSystem ticketSystem = new TicketSystem();
@@ -117,15 +137,21 @@ public class Main {
         // Добавление мероприятий
         Event event1 = new Event("Концерт", "20 февраля 2024", "Зал 'Концертный'");
         Event event2 = new Event("Театральное представление", "25 февраля 2024", "Театр 'Драма'");
-        ticketSystem.addEvent(1, event1);
-        ticketSystem.addEvent(2, event2);
+        ticketSystem.addEvent(event1);
+        ticketSystem.addEvent(event2);
 
         // Добавление билетов
         ticketSystem.addTicket("Концерт", "Классический", 50.0);
         ticketSystem.addTicket("Театральное представление", "Премиум", 100.0);
+        System.out.println("--------");
 
         // Отображение информации о мероприятии и билете
-        ticketSystem.showEventInfo(1);
+        ticketSystem.showEventInfo("Концерт");
+        System.out.println("--------");
+        ticketSystem.showEventInfo("Театральное представление");
+
+        System.out.println("--------");
+
         ticketSystem.showTicketInfo(1);
     }
 }
