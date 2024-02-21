@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.Connection;
 
 public class TicketSystem {
     private List<Event> events = new ArrayList<>();
@@ -21,6 +24,31 @@ public class TicketSystem {
         Ticket ticket = new Ticket(eventName, type, price, clientName);
         tickets.add(ticket);
         System.out.println("Билет успешно добавлен. Номер билета: " + ticket.getId());
+
+        String url = "jdbc:postgresql://localhost:5432/postgres";
+        String user = "postgres"; // username of user
+        String password = "123"; // password
+
+        String sqlCode = "INSERT INTO tickets (id, event, type, price, name) VALUES(?,?,?,?,?)";
+
+
+
+
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement pstmt = conn.prepareStatement(sqlCode)) {
+            // Insert first student
+            pstmt.setInt(1, ticket.getId());
+            pstmt.setString(2, eventName);
+            pstmt.setString(3, type);
+            pstmt.setDouble(4, price);
+            pstmt.setString(5, clientName);
+
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 
     // Метод для поиска мероприятия по имени
@@ -69,4 +97,13 @@ public class TicketSystem {
         return null;
     }
 
+    // Метод для поиска билета по имени покупателя
+    private Ticket findTicketByClientName(String clientName) {
+        for (Ticket ticket : tickets) {
+            if (ticket.getClientName() == clientName) {
+                return ticket;
+            }
+        }
+        return null;
+    }
 }
