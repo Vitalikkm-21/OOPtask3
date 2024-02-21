@@ -29,7 +29,15 @@ public class TicketSystem {
         String user = "postgres"; // username of user
         String password = "123"; // password
 
-        String sqlCode = "INSERT INTO tickets (id, event, type, price, name) VALUES(?,?,?,?,?)";
+        String sqlCode = "DROP TABLE IF EXISTS tickets;" +
+                "CREATE TABLE IF NOT EXISTS tickets(" +
+                "id int ," +
+                "event varchar(60)," +
+                "type varchar(60)," +
+                "price float," +
+                "name varchar(60)" +
+                ");" +
+                "INSERT INTO tickets (id, event, type, price, name) VALUES(?,?,?,?,?)";
 
 
 
