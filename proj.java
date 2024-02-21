@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 
 public class proj {
     public static void main(String[] args) {
@@ -12,9 +14,42 @@ public class proj {
         ticketSystem.addEvent(event1);
         ticketSystem.addEvent(event2);
 
-        // Добавление билетов
-        ticketSystem.addTicket("Концерт", "Классический", 50.0, "Нурсая");
-        ticketSystem.addTicket("Театральное представление", "Премиум", 100.0, "Мадина");
+        // Добавление билетов вручную
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.print("Куда вы хотите пойти 1 - Концерт, 2 - Театральное представление, 0 - чтобы закончить покупки: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            if (choice == 1) {
+                System.out.println("Добавление билета на Концерт:");
+                System.out.print("Тип билета: ");
+                String ticketType = scanner.nextLine();
+                System.out.print("Цена билета: ");
+                double ticketPrice = scanner.nextDouble();
+                scanner.nextLine();
+                System.out.print("Имя покупателя: ");
+                String buyerName = scanner.nextLine();
+
+                ticketSystem.addTicket("Концерт", ticketType, ticketPrice, buyerName);
+            } else if (choice == 2) {
+                System.out.println("Добавление билета на Театральное представление:");
+                System.out.print("Тип билета: ");
+                String ticketType = scanner.nextLine();
+                System.out.print("Цена билета: ");
+                double ticketPrice = scanner.nextDouble();
+                scanner.nextLine(); // Чтение лишнего перевода строки после ввода числа
+                System.out.print("Имя покупателя: ");
+                String buyerName = scanner.nextLine();
+
+                ticketSystem.addTicket("Театральное представление", ticketType, ticketPrice, buyerName);
+            } else if (choice == 0) {
+                break;
+            }
+            else {
+                System.out.print("Ошибка ввода мероприятия");
+            }
+        }
+
         System.out.println("--------");
 
         // Отображение информации о мероприятии и билете
@@ -23,7 +58,11 @@ public class proj {
         ticketSystem.showEventInfo("Театральное представление");
 
         System.out.println("--------");
+        System.out.println("какой ID билета вывести?");
+        int id_ticket = scanner.nextInt();
+        ticketSystem.showTicketInfo(id_ticket);
 
-        ticketSystem.showTicketInfo(1);
+        // Закрытие Scanner
+        scanner.close();
     }
 }

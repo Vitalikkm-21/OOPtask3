@@ -69,13 +69,4 @@ public class TicketSystem {
         return null;
     }
 
-    // Метод для поиска билета по имени покупателя
-    private Ticket findTicketByClientName(String clientName) {
-        for (Ticket ticket : tickets) {
-            if (ticket.getClientName() == clientName) {
-                return ticket;
-            }
-        }
-        return null;
-    }
 }
