@@ -9,7 +9,7 @@ public class proj {
         TicketSystem ticketSystem = new TicketSystem();
 
         // Добавление мероприятий
-        Event event1 = new Event("Концерт", "20 февраля 2024", "Зал 'Концертный'");
+        Event event1 = new Event("Концерт", "22 февраля 2024", "Зал 'Концертный'");
         Event event2 = new Event("Театральное представление", "25 февраля 2024", "Театр 'Драма'");
         ticketSystem.addEvent(event1);
         ticketSystem.addEvent(event2);
