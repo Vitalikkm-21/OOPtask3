@@ -1,3 +1,5 @@
+package src;
+
 public class Ticket {
     private static int nextId = 1; // Статическая переменная для генерации уникального номера билета
     private int id;

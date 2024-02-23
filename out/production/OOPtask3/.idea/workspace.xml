@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9897a860-9fa3-490b-90f4-e44cc2adf972" name="Changes" comment="test first test version">
-      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="9897a860-9fa3-490b-90f4-e44cc2adf972" name="Changes" comment="add the postgresql db">
       <change beforePath="$PROJECT_DIR$/TicketSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/TicketSystem.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,7 +37,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/dz/DZ/java/postgresql-42.7.1.jar",
+    "last_opened_file_path": "C:/Users/baa20/Downloads/Exercises_solution",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -71,7 +69,31 @@
       <option name="project" value="LOCAL" />
       <updated>1708509813676</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add the postgresql db">
+      <option name="closed" value="true" />
+      <created>1708544491166</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1708544491166</updated>
+    </task>
+    <task id="LOCAL-00004" summary="add the postgresql db">
+      <option name="closed" value="true" />
+      <created>1708544581776</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1708544581776</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add the postgresql db">
+      <option name="closed" value="true" />
+      <created>1708544755441</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1708544755441</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -99,6 +121,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="test first test version" />
-    <option name="LAST_COMMIT_MESSAGE" value="test first test version" />
+    <MESSAGE value="add the postgresql db" />
+    <option name="LAST_COMMIT_MESSAGE" value="add the postgresql db" />
   </component>
 </project>
