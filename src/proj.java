@@ -35,9 +35,9 @@ public class proj {
                 ticketSystem.addTicket("Концерт", ticketType, ticketPrice, buyerName);
             } else if (choice == 2) {
                 System.out.println("Добавление билета на Театральное представление:");
-                System.out.print("Тип билета: ");
+                System.out.print(" Напишите тип билета: ");
                 String ticketType = scanner.nextLine();
-                System.out.print("Цена билета: ");
+                System.out.print(" Напишите цену билета: ");
                 double ticketPrice = scanner.nextDouble();
                 scanner.nextLine(); // Чтение лишнего перевода строки после ввода числа
                 System.out.print("Имя покупателя: ");
