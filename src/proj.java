@@ -19,7 +19,7 @@ public class proj {
         // Добавление билетов вручную
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.print("Куда вы хотите пойти 1 - Концерт, 2 - Театральное представление, 0 - чтобы закончить покупки: ");
+            System.out.print("Выберите куда вы пойдете: 1 - Концерт, 2 - Театральное представление, 0 - чтобы закончить покупки: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
             if (choice == 1) {
