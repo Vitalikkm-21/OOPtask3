@@ -1,10 +1,9 @@
 package src;
-
+// Event.java
 public class Event {
-
-        private String name;
-        private String date;
-        private String location;
+    private String name;
+    private String date;
+    private String location;
 
     public Event(String name, String date, String location) {
         this.name = name;
@@ -12,17 +11,16 @@ public class Event {
         this.location = location;
     }
 
-        // Геттеры для получения информации о мероприятии
-        public String getName() {
+    // Getters for event information
+    public String getName() {
         return name;
     }
 
-        public String getDate() {
+    public String getDate() {
         return date;
     }
 
-        public String getLocation() {
+    public String getLocation() {
         return location;
     }
-    }
-
+}

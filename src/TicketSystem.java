@@ -1,5 +1,4 @@
 package src;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
@@ -9,24 +8,32 @@ import java.sql.Connection;
 public class TicketSystem {
     private List<Event> events = new ArrayList<>();
     private List<Ticket> tickets = new ArrayList<>();
+    private TicketBuilder ticketBuilder;
 
-    // Метод для добавления мероприятия
+    public TicketSystem() {
+        this.ticketBuilder = new ConcreteTicketBuilder();
+    }
+
+    // Method to add an event
     public void addEvent(Event event) {
         events.add(event);
     }
 
-    // Метод для добавления билета
+    // Method to add a ticket
     public void addTicket(String eventName, String type, double price, String clientName) {
         Event event = findEventByName(eventName);
         if (event == null) {
-            System.out.println("Мероприятие не найдено.");
+            System.out.println("Event not found.");
             return;
         }
 
-        Ticket ticket = new Ticket(eventName, type, price, clientName);
+        Ticket ticket = ticketBuilder.setEventName(eventName)
+                .setType(type)
+                .setPrice(price)
+                .setClientName(clientName)
+                .build();
         tickets.add(ticket);
-        System.out.println("Билет успешно добавлен. Номер билета: " + ticket.getId());
-
+        System.out.println("Ticket added successfully. Ticket ID: " + ticket.getId());
         String url = "jdbc:postgresql://localhost:5432/postgres";
         String user = "postgres"; // username of user
         String password = "123"; // password
@@ -40,9 +47,6 @@ public class TicketSystem {
                 "name varchar(60)" +
                 ");" +
                 "INSERT INTO tickets (id, event, type, price, name) VALUES(?,?,?,?,?)";
-
-
-
 
         try (Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement pstmt = conn.prepareStatement(sqlCode)) {
@@ -59,9 +63,11 @@ public class TicketSystem {
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         }
+
+        // Database insertion logic should be added here
     }
 
-    // Метод для поиска мероприятия по имени
+    // Method to find an event by name
     private Event findEventByName(String eventName) {
         for (Event event : events) {
             if (event.getName().equals(eventName)) {
@@ -71,33 +77,33 @@ public class TicketSystem {
         return null;
     }
 
-    // Метод для отображения информации о мероприятии по его имени
+    // Method to display event information by its name
     public void showEventInfo(String eventName) {
         Event event = findEventByName(eventName);
         if (event != null) {
-            System.out.println("Название мероприятия: " + event.getName());
-            System.out.println("Дата: " + event.getDate());
-            System.out.println("Место: " + event.getLocation());
+            System.out.println("Event Name: " + event.getName());
+            System.out.println("Date: " + event.getDate());
+            System.out.println("Location: " + event.getLocation());
         } else {
-            System.out.println("Мероприятие с указанным именем не найдено.");
+            System.out.println("Event with the specified name not found.");
         }
     }
 
-    // Метод для отображения информации о билете по его ID
+    // Method to display ticket information by its ID
     public void showTicketInfo(int ticketId) {
         Ticket ticket = findTicketById(ticketId);
         if (ticket != null) {
-            System.out.println("Номер билета: " + ticket.getId());
-            System.out.println("Мероприятие: " + ticket.getEvent());
-            System.out.println("Тип билета: " + ticket.getType());
-            System.out.println("Цена: " + ticket.getPrice());
-            System.out.println("Имя покупателя: " + ticket.getClientName());
+            System.out.println("Ticket ID: " + ticket.getId());
+            System.out.println("Event: " + ticket.getEvent());
+            System.out.println("Ticket Type: " + ticket.getType());
+            System.out.println("Price: " + ticket.getPrice());
+            System.out.println("Client Name: " + ticket.getClientName());
         } else {
-            System.out.println("Билет с указанным номером не найден.");
+            System.out.println("Ticket with the specified ID not found.");
         }
     }
 
-    // Метод для поиска билета по его ID
+    // Method to find a ticket by its ID
     private Ticket findTicketById(int ticketId) {
         for (Ticket ticket : tickets) {
             if (ticket.getId() == ticketId) {
@@ -107,10 +113,10 @@ public class TicketSystem {
         return null;
     }
 
-    // Метод для поиска билета по имени покупателя
+    // Method to find a ticket by the client's name
     private Ticket findTicketByClientName(String clientName) {
         for (Ticket ticket : tickets) {
-            if (ticket.getClientName() == clientName) {
+            if (ticket.getClientName().equals(clientName)) {
                 return ticket;
             }
         }

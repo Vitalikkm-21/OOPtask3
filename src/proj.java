@@ -1,70 +1,66 @@
 package src;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-
 
 public class proj {
     public static void main(String[] args) {
-        // Создание системы управления билетами
+        // Creating a ticket management system
         TicketSystem ticketSystem = new TicketSystem();
 
-        // Добавление мероприятий
-        Event event1 = new Event("Концерт", "22 февраля 2024", "Зал 'Концертный'");
-        Event event2 = new Event("Театральное представление", "26 февраля 2024", "Театр 'Драма'");
+        // Adding events
+        Event event1 = new Event("Concert", "February 22, 2024", "Concert Hall");
+        Event event2 = new Event("Theatrical Performance", "February 26, 2024", "Drama Theater");
         ticketSystem.addEvent(event1);
         ticketSystem.addEvent(event2);
 
-        // Добавление билетов вручную
+        // Adding tickets manually
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.print("Выберите куда вы пойдете: 1 - Концерт, 2 - Театральное представление, 0 - чтобы закончить покупки: ");
+            System.out.print("Choose where you want to go: 1 - Concert, 2 - Theatrical Performance, 0 - to finish purchases: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
             if (choice == 1) {
-                System.out.println("Добавление билета на Концерт:");
-                System.out.print("Тип билета: ");
+                System.out.println("Adding a ticket for the Concert:");
+                System.out.print("Ticket Type: ");
                 String ticketType = scanner.nextLine();
-                System.out.print("Цена билета: ");
+                System.out.print("Ticket Price: ");
                 double ticketPrice = scanner.nextDouble();
                 scanner.nextLine();
-                System.out.print("Имя покупателя: ");
+                System.out.print("Buyer Name: ");
                 String buyerName = scanner.nextLine();
 
-                ticketSystem.addTicket("Концерт", ticketType, ticketPrice, buyerName);
+                ticketSystem.addTicket("Concert", ticketType, ticketPrice, buyerName);
             } else if (choice == 2) {
-                System.out.println("Добавление билета на Театральное представление:");
-                System.out.print(" Напишите тип билета: ");
+                System.out.println("Adding a ticket for the Theatrical Performance:");
+                System.out.print("Ticket Type: ");
                 String ticketType = scanner.nextLine();
-                System.out.print(" Напишите цену билета: ");
+                System.out.print("Ticket Price: ");
                 double ticketPrice = scanner.nextDouble();
-                scanner.nextLine(); // Чтение лишнего перевода строки после ввода числа
-                System.out.print("Имя покупателя: ");
+                scanner.nextLine(); // Reading the extra newline after entering the number
+                System.out.print("Buyer Name: ");
                 String buyerName = scanner.nextLine();
 
-                ticketSystem.addTicket("Театральное представление", ticketType, ticketPrice, buyerName);
+                ticketSystem.addTicket("Theatrical Performance", ticketType, ticketPrice, buyerName);
             } else if (choice == 0) {
                 break;
-            }
-            else {
-                System.out.print("Ошибка ввода мероприятия");
+            } else {
+                System.out.println("Invalid event selection.");
             }
         }
 
         System.out.println("--------");
 
-        // Отображение информации о мероприятии и билете
-        ticketSystem.showEventInfo("Концерт");
+        // Displaying information about events and tickets
+        ticketSystem.showEventInfo("Concert");
         System.out.println("--------");
-        ticketSystem.showEventInfo("Театральное представление");
+        ticketSystem.showEventInfo("Theatrical Performance");
 
         System.out.println("--------");
-        System.out.println("какой ID билета вывести?");
-        int id_ticket = scanner.nextInt();
-        ticketSystem.showTicketInfo(id_ticket);
+        System.out.println("Which ticket ID do you want to display?");
+        int ticketId = scanner.nextInt();
+        ticketSystem.showTicketInfo(ticketId);
 
-        // Закрытие Scanner
+        // Closing the Scanner
         scanner.close();
     }
 }
+

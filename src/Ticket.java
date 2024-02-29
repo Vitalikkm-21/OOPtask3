@@ -1,7 +1,7 @@
 package src;
-
+// Ticket.java
 public class Ticket {
-    private static int nextId = 1; // Статическая переменная для генерации уникального номера билета
+    private static int nextId = 1;
     private int id;
     private String event;
     private String type;
@@ -9,14 +9,14 @@ public class Ticket {
     private String clientName;
 
     public Ticket(String event, String type, double price, String clientName) {
-        this.id = nextId++; // Генерация уникального номера билета
+        this.id = nextId++;
         this.event = event;
         this.type = type;
         this.price = price;
         this.clientName = clientName;
     }
 
-    // Геттеры для получения информации о билете
+    // Getters for ticket information
     public int getId() {
         return id;
     }
@@ -32,8 +32,8 @@ public class Ticket {
     public double getPrice() {
         return price;
     }
+
     public String getClientName() {
         return clientName;
     }
-
 }
